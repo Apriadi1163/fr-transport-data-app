@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Container, Button, Dropdown } from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios";
 
-function Adddata(){
+function Update(){
     let navigate = useNavigate();
+    let {id} = useParams();
     function gotoBack(){
         navigate("/")
     }
@@ -19,6 +20,16 @@ function Adddata(){
         warnaKendaraan:"",
         bahanBakar:"",
     })
+
+    const getTransportation = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/kendaraan/${id}`)
+            setForm(response.data)
+            console.log(response.data)
+        }catch(error){
+            console.log(error)
+        }
+    }
 
     const handleChange = (e) => {
         setForm({
@@ -39,12 +50,15 @@ function Adddata(){
 
             const body = JSON.stringify(form);
 
-            const response = await axios.post("http://localhost:8080/kendaraan/add", body, config);
+            const response = await axios.put("http://localhost:8080/kendaraan/" + id, body, config);
             navigate("/")
         }catch(error){
             console.log(error)
         }
     }
+    useEffect(() => {
+        getTransportation();
+      }, []);
     return(
         <div>
             <h3 style={{marginTop:"2em", marginBottom:"1.5em", marginLeft:"4em"}}>Tambah Data Kendaraan</h3>
@@ -60,8 +74,9 @@ function Adddata(){
                                     type="text"
                                     name="nomorRegistrasi"
                                     onChange={handleChange}
+                                    value={form.nomorRegistrasi}
                                     style={{width:"20em", marginBottom:"1.5em"}}
-                                    required
+                                    disabled
                                 />
                             </Form.Group>
 
@@ -73,8 +88,9 @@ function Adddata(){
                                     type="text"
                                     name="namaPemilik"
                                     onChange={handleChange}
+                                    value={form.namaPemilik}
                                     style={{width:"20em", marginBottom:"1.5em"}}
-                                    required
+                                    disabled
                                 />
                             </Form.Group>
 
@@ -86,6 +102,7 @@ function Adddata(){
                                     type="text"
                                     name="merekKendaraan"
                                     onChange={handleChange}
+                                    value={form.merekKendaraan}
                                     style={{width:"20em", marginBottom:"1.5em"}}
                                 />
                             </Form.Group>
@@ -97,6 +114,7 @@ function Adddata(){
                             onChange={handleChange}
                             id="floatingTextarea"
                             name="alamat"
+                            value={form.alamat}
                             ></textarea>
                             
                             
@@ -109,11 +127,9 @@ function Adddata(){
                                 <Form.Label>Tahun Pembuatan</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    placeholder="YYYY"
-                                    pattern="\d*"
-                                    maxlength="4"
                                     name="tahunPembuatan"
                                     onChange={handleChange}
+                                    value={form.tahunPembuatan}
                                     style={{width:"20em", marginBottom:"1.5em"}}
                                 />
                             </Form.Group>
@@ -126,6 +142,7 @@ function Adddata(){
                                     type="text"
                                     name="kapasitasSilinder"
                                     onChange={handleChange}
+                                    value={form.kapasitasSilinder}
                                     style={{width:"20em", marginBottom:"1.5em"}}
                                 />
                             </Form.Group>
@@ -133,6 +150,7 @@ function Adddata(){
                             <label>Warna Kendaraan</label>
                             <select class="form-select" aria-label="Default select example" name="warnaKendaraan" onChange={handleChange}
                                 style={{width:"20em", marginBottom:"1.5em"}}
+                                value={form.warnaKendaraan}
                             >
                                 <option selected>Pilih warna</option>
                                 <option value="Merah">Merah</option>
@@ -151,6 +169,7 @@ function Adddata(){
                                     type="text"
                                     name="bahanBakar"
                                     onChange={handleChange}
+                                    value={form.bahanBakar}
                                     style={{width:"20em", marginBottom:"1.5em"}}
                                 />
                             </Form.Group>
@@ -171,4 +190,4 @@ function Adddata(){
     )
 }
 
-export default Adddata;
+export default Update;

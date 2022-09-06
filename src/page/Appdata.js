@@ -16,6 +16,10 @@ function Appdata(){
         navigate("/detail/"+id)
     }
 
+    function gotoEdit(id){
+        navigate("/update/"+id)
+    }
+
     const [transportation, setTransportation] = useState([]);
     const getTransportation = async () => {
         try{
@@ -60,6 +64,11 @@ function Appdata(){
           setConfirmDelete(null);
         }
     }, [confirmDelete]);
+    const handleChange = (e) => {
+        e.preventDefault();
+        setSearchTerm(e.target.value);
+    }
+    
     return(
         <div>
             <h1 style={{marginLeft:"2.5em"}}>Aplikasi Data Kendaraan</h1>
@@ -82,14 +91,15 @@ function Appdata(){
                     <input
                     className="fs-5 p-2 text-dark fw-bold rounded w-50 text-center "
                     type="text"
-                    onChange={(e) => setSearchTerm(e.target.value)}
-
+                    // onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={handleChange}
+                    // value={searchTerm}
                     />
                     
                 </div>
             </Container>
             <div className="handle-button">
-                <Button style={{width: "135px", marginRight:"0.5em"}} onChange={(e) => setSearchTerm(e.target.value)}>Search</Button>
+                <Button style={{width: "135px", marginRight:"0.5em"}} onChange={handleChange}>Search</Button>
                 <Button style={{width: "135px"}} onClick={gotoAdd} >Add</Button>
             </div>
             <Container>
@@ -99,13 +109,12 @@ function Appdata(){
                     <th width="1%" className="text-center">No</th>
                     <th width="10%">Nomor Registrasi</th>
                     <th width="10%">Nama</th>
-                    <th width="10%">Alamat</th>
                     <th width="10%">Merek Kendaraan</th>
                     <th width="10%">Tahun Pembuatan</th>
                     <th width="10%">Kapasitas Silinder</th>
                     <th width="10%">Warna Kendaraan</th>
                     <th width="10%">Bahan Bakar</th>
-                    <th style={{textAlign:"center"}} width="19%" >Action</th>
+                    <th style={{textAlign:"center"}} width="29%" >Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -123,7 +132,7 @@ function Appdata(){
                     <td>{index + 1}</td>
                     <td>{item.nomorRegistrasi}</td>
                     <td>{item.namaPemilik}</td>
-                    <td>{item.alamat}</td>
+                    {/* <td>{item.alamat}</td> */}
                     <td>{item.merekKendaraan}</td>
                     <td>{item.tahunPembuatan}</td>
                     <td>{item.kapasitasSilinder}</td>
@@ -133,8 +142,9 @@ function Appdata(){
                         <Container>
                             <Row>
                         
-                        <Button onClick={() => gotoDetail(item.id)} style={{width: "75px", marginRight:"7px"}} variant="warning">Detail</Button>
-                        <Button variant="danger" onClick={() => {handleDelete(item.id)}} style={{width: "75px"}}>Delete</Button>
+                            <Button onClick={() => gotoDetail(item.id)} style={{width: "75px", marginRight:"7px"}} variant="warning">Detail</Button>
+                            <Button variant="primary" style={{width: "75px", marginRight:"7px"}} onClick={() => {gotoEdit(item.id)}}>Edit</Button>
+                            <Button variant="danger" onClick={() => {handleDelete(item.id)}} style={{width: "75px"}}>Delete</Button>
                         </Row>
                         </Container>
                     </td>

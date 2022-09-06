@@ -40,7 +40,9 @@ function Detaildata(){
                                 <Form.Control
                                     type="text"
                                     style={{width:"20em", marginBottom:"1.5em"}}
-                                    placeholder={transportation.nomorRegistrasi}
+                                    value={transportation.nomorRegistrasi}
+                                    // placeholder={transportation.nomorRegistrasi}
+                                    disabled
                                 />
                             </Form.Group>
 
@@ -65,7 +67,9 @@ function Detaildata(){
                                     type="text"
                                     
                                     style={{width:"20em", marginBottom:"1.5em"}}
-                                    placeholder={transportation.merekKendaraan}
+                                    value={transportation.merekKendaraan}
+                                    // placeholder={transportation.merekKendaraan}
+                                    disabled
                                 />
                             </Form.Group>
 
@@ -74,7 +78,9 @@ function Detaildata(){
                             class="form-control"
                             style={{ resize: "none", height: "100px", width:"20em", marginBottom:"1.5em" }}
                             id="floatingTextarea"
-                            placeholder={transportation.alamat}
+                            value={transportation.alamat}
+                            // placeholder={transportation.alamat}
+                            disabled
                             ></textarea>
                             
                             
@@ -88,7 +94,9 @@ function Detaildata(){
                                 <Form.Control
                                     type="text"
                                     style={{width:"20em", marginBottom:"1.5em"}}
-                                    placeholder={transportation.tahunPembuatan}
+                                    value={transportation.tahunPembuatan}
+                                    // placeholder={transportation.tahunPembuatan}
+                                    disabled
                                 />
                             </Form.Group>
 
@@ -99,7 +107,9 @@ function Detaildata(){
                                 <Form.Control
                                     type="text"
                                     style={{width:"20em", marginBottom:"1.5em"}}
-                                    placeholder={transportation.kapasitasSilinder}
+                                    value={transportation.kapasitasSilinder}
+                                    // placeholder={transportation.kapasitasSilinder}
+                                    disabled
                                 />
                             </Form.Group>
 
@@ -112,7 +122,9 @@ function Detaildata(){
                                 <Form.Control
                                     type="text"
                                     style={{width:"20em", marginBottom:"1.5em"}}
-                                    placeholder={transportation.warnaKendaraan}
+                                    // placeholder={transportation.warnaKendaraan}
+                                    value={transportation.warnaKendaraan}
+                                    disabled
                                 />
                             </Form.Group>
 
@@ -123,7 +135,9 @@ function Detaildata(){
                                 <Form.Control
                                     type="text"
                                     style={{width:"20em", marginBottom:"1.5em"}}
-                                    placeholder={transportation.bahanBakar}
+                                    // placeholder={transportation.bahanBakar}
+                                    value={transportation.bahanBakar}
+                                    disabled
                                 />
                             </Form.Group>
                         </div>
